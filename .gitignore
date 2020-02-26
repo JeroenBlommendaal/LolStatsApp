@@ -1,0 +1,10 @@
+# Visual Studio
+**/.vs/
+**/_Resharper.Caches/
+# Build artifacts
+**/bin/
+**/obj/
+artifacts/**
+tools/**
+wwwroot
+build
