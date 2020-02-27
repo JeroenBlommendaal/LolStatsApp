@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
 
 const SummonerSearch = () => {
     const [region, setRegion] = useState('euw1');
@@ -53,9 +54,9 @@ const SummonerSearch = () => {
                     value={summonerName}
                     onChange={onSummonerNameChange}
                 />
-                <button
+                <Button variant="contained" color="primary"
                     onClick={searchSummoner}
-                    >Search</button>
+                    >Search</Button>
             </>
             )
             : null}
