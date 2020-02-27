@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
-import 'tachyons';
-import Header from './header.js';
-import SummonerSearch from './SummonerSearch.js';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import Index from './Components/index.js'
 
 class App extends Component {
   render() {
     return (
-      <div className='tc'>
+      <div>
         <Header />
-        <i>feed.gg</i>
-        <SummonerSearch />
+        <Index />
+        <Footer />
       </div>
     );
   }

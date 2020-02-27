@@ -15,7 +15,7 @@ namespace LolApp.Services
         public RiotApi()
         {
             _client = new HttpClient();
-            _client.DefaultRequestHeaders.Add("X-Riot-Token", "RGAPI-f32cbd6e-a506-48c4-9d55-323d3cba4245");
+            _client.DefaultRequestHeaders.Add("X-Riot-Token", "RGAPI-1ecc23a1-acbd-4897-a804-78f20d9a4736");
             _client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
         }
 
