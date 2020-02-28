@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import PublicIcon from '@material-ui/icons/Public';
 import SyncIcon from '@material-ui/icons/Sync';
+import SummonerSearch from './SummonerSearch';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
     },
 }));
+
 
 export default function MenuAppBar() {
     const classes = useStyles();
@@ -35,12 +37,18 @@ export default function MenuAppBar() {
         setAnchorEl(null);
     };
 
+    const resetId = () => {
+        SummonerSearch.setSummonerId(null);
+    }
+
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" style = {{height:"7%"}}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <SyncIcon />
+                        <SyncIcon
+                            onClick={resetId}>
+                        </SyncIcon>
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         International bureau of league statistics
