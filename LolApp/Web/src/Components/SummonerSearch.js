@@ -76,9 +76,7 @@ const SummonerSearch = () => {
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>
-                    <avatar>
                         <img style={{ backgroundColor: 'transparant' }} width="50" height="50" alt="league icon" src={LeagueIcon}></img>
-                    </avatar>
                     <Typography component="h1" variant="h5">
                         Find summoner
                     </Typography>
@@ -107,7 +105,7 @@ const SummonerSearch = () => {
                             color="primary"
                             onClick={searchSummoner}
                             className={classes.form}
-                            fullwidth
+                            fullWidth
                         >Search
                     </Button>
                     </form>
