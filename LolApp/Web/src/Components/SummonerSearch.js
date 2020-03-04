@@ -34,12 +34,15 @@ const SummonerSearch = () => {
     const [region, setRegion] = useState('euw1');
     const [summonerName, setSummonerName] = useState('');
     const [summonerId, setSummonerId] = useState(null);
+    const [response, setResponse] = useState(null);
 
     const classes = useStyles();
 
-    let data;
 
     const searchSummoner = async () => {
+        
+        let data;
+
         const result = await fetch(`/api/summoner`, {
             method: 'POST',
             headers: {
@@ -56,7 +59,7 @@ const SummonerSearch = () => {
             data = await result.json();
             setSummonerId(data.id);
             console.log(JSON.stringify(data));
-            return data
+            setResponse(data);
         } else {
             console.error(`Error during summoner call: ${result.error}`);
         }
@@ -115,10 +118,13 @@ const SummonerSearch = () => {
     }
     else {
         return (
-            <div>
-                <Container component="main" maxWidth="xs">
-                </Container>
-            </div>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div>
+                    <p>{data.id}</p>
+                    <p>{data.summonerLevel}</p>
+                </div>
+            </Container>
         )
     }
 }
