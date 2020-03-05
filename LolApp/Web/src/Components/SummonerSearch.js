@@ -9,6 +9,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import LeagueIcon from '../Images/leagueIcon.png';
+import Avatar from "@material-ui/core/Avatar"
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -18,6 +19,8 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
     },
     avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
     },
     form: {
         width: '100%', // Fix IE 11 issue.
@@ -34,13 +37,12 @@ const SummonerSearch = () => {
     const [region, setRegion] = useState('euw1');
     const [summonerName, setSummonerName] = useState('');
     const [summonerId, setSummonerId] = useState(null);
-    const [response, setResponse] = useState(null);
+    const [summonerIcon, setSummonerIcon] = useState('');
 
     const classes = useStyles();
 
-
     const searchSummoner = async () => {
-        
+
         let data;
 
         const result = await fetch(`/api/summoner`, {
@@ -58,8 +60,8 @@ const SummonerSearch = () => {
         if (result.ok) {
             data = await result.json();
             setSummonerId(data.id);
+            setSummonerIcon(data.profileIconId)
             console.log(JSON.stringify(data));
-            setResponse(data);
         } else {
             console.error(`Error during summoner call: ${result.error}`);
         }
@@ -79,7 +81,7 @@ const SummonerSearch = () => {
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>
-                        <img style={{ backgroundColor: 'transparant' }} width="50" height="50" alt="league icon" src={LeagueIcon}></img>
+                    <img style={{ backgroundColor: 'transparant' }} width="50" height="50" alt="league icon" src={LeagueIcon}></img>
                     <Typography component="h1" variant="h5">
                         Find summoner
                     </Typography>
@@ -120,14 +122,17 @@ const SummonerSearch = () => {
         return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <div>
-                    <p>{data.id}</p>
-                    <p>{data.summonerLevel}</p>
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <img style={{ backgroundColor: 'transparant' }} width="150" height="150" alt="league icon" src={"http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/" + summonerIcon + ".png"}></img>
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        {summonerName}
+                    </Typography>
                 </div>
             </Container>
         )
     }
 }
-
 
 export default SummonerSearch;
