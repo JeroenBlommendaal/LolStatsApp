@@ -9,5 +9,6 @@ namespace LolApp.Services
     public interface IRiotApi
     {
         public Task<SummonerResponse> GetSummonerInfoAsync(string summonerName, string region);
+        public Task<RankedResponse> GetRankedInfoAsync(string id, string region);
     }
 }

@@ -38,6 +38,7 @@ const SummonerSearch = () => {
     const [summonerName, setSummonerName] = useState('');
     const [summonerId, setSummonerId] = useState(null);
     const [summonerIcon, setSummonerIcon] = useState('');
+    const [rankedData, setRankedData] = useState(null);
 
     const classes = useStyles();
 
@@ -60,8 +61,36 @@ const SummonerSearch = () => {
         if (result.ok) {
             data = await result.json();
             setSummonerId(data.id);
-            setSummonerIcon(data.profileIconId)
+            setSummonerIcon(data.profileIconId);
             console.log(JSON.stringify(data));
+            searchRanked()
+        } else {
+            console.error(`Error during summoner call: ${result.error}`);
+        }
+    }
+
+    const searchRanked = async () => {
+
+        let rankedData
+
+        console.log(summonerId);
+
+        const result = await fetch(`/api/ranked`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: summonerId,
+                region
+            })
+        });
+
+        if (result.ok) {
+            rankedData = await result.json();
+            setRankedData(rankedData)
+            console.log(JSON.stringify(rankedData));
         } else {
             console.error(`Error during summoner call: ${result.error}`);
         }
@@ -128,6 +157,7 @@ const SummonerSearch = () => {
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         {summonerName}
+                        {rankedData}
                     </Typography>
                 </div>
             </Container>

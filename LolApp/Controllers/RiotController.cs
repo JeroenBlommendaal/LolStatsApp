@@ -29,5 +29,14 @@ namespace LolApp.Controllers
 
             return summonerInfo;
         }
+
+        [HttpPost]
+        [Route("api/ranked")]
+        public async Task<RankedResponse> GetRankedInfo([FromBody]RankedRequest request)
+        {
+            var rankedInfo = await _riotApi.GetRankedInfoAsync(request.Id, request.Region);
+
+            return rankedInfo;
+        }
     }
 }

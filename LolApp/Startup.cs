@@ -39,6 +39,7 @@ namespace LolApp
             }
 
             app.UseDefaultFiles();
+
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();

@@ -15,7 +15,7 @@ namespace LolApp.Services
         public RiotApi()
         {
             _client = new HttpClient();
-            _client.DefaultRequestHeaders.Add("X-Riot-Token", "RGAPI-038de300-113e-4ccf-856f-520e1ab67ee5");
+            _client.DefaultRequestHeaders.Add("X-Riot-Token", "RGAPI-2f29defb-8a2d-4e8f-9bb5-393798cce72c");
             _client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
         }
 
@@ -37,6 +37,27 @@ namespace LolApp.Services
                 Console.WriteLine(e.Message);
             }
             return new SummonerResponse();
+        }
+
+        public async Task<RankedResponse> GetRankedInfoAsync(string id, string region)
+        {
+            try
+            {
+                var uri = $"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{id}";
+                var response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = await response.Content.ReadAsStringAsync();
+                    var json = JsonConvert.DeserializeObject<RankedResponse>(jsonString);
+                    return json;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return new RankedResponse();
         }
     }
 }
